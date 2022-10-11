@@ -13,7 +13,7 @@ namespace Mango.Web
         {
             GET,
             POST,
-            PUT,
+            PATCH,
             DELETE
         }
     }
