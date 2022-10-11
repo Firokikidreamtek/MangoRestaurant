@@ -1,7 +1,15 @@
+using Mango.Web.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add implementation of HTTPClient
+
+builder.Services.AddHttpClient<IProductService, IProductService>();
+builder.Services.AddScoped<IProductService, IProductService>();
+
 
 var app = builder.Build();
 

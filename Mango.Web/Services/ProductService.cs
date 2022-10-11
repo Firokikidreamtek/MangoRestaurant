@@ -11,7 +11,7 @@ namespace Mango.Web.Services
 {
     public class ProductService : BaseService, IProductService
     {
-        private string servUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ServiceUrls")["ProductAPI"];
+        private readonly string servUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ServiceUrls")["ProductAPI"];
         public ProductService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
         }
@@ -22,7 +22,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = product,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = servUrl + "/api/products",
                 AccessToken = ""
             });
         }
@@ -32,7 +32,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.ProductAPIBase + "/api/products" + id,
+                Url = servUrl + "/api/products" + id,
                 AccessToken = ""
             });
         }
@@ -42,7 +42,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = servUrl + "/api/products",
                 AccessToken = ""
             });
         }
@@ -52,7 +52,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products" + id,
+                Url = servUrl + "/api/products" + id,
                 AccessToken = ""
             });
         }
@@ -63,7 +63,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.PATCH,
                 Data = product,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = servUrl + "/api/products",
                 AccessToken = ""
             });
         }
