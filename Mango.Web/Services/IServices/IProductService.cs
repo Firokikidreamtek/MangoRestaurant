@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Mango.Web.Services.IServices
 {
-    public interface IProductService
+    public interface IProductService : IBaseService
     {
-        Task<T> GetAllAsync<T>();
-        Task<T> GetByIdAsync<T>(int id);
-        Task<T> CreateProductAsync<T>(ProductDto product);
-        Task<T> UpdateProductAsync<T>(ProductDto product);
-        Task<T> DeleteProductAsync<T>(int id);
+        public Task<T> GetAllAsync<T>();
+        public Task<T> GetByIdAsync<T>(int id);
+        public Task<T> CreateProductAsync<T>(ProductDto product);
+        public Task<T> UpdateProductAsync<T>(ProductDto product);
+        public Task<T> DeleteProductAsync<T>(int id);
 
     }
 }
