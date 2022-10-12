@@ -40,6 +40,7 @@ namespace Mango.Services.ProductAPI.Repository
             {
                 Product newProduct = _mapper.Map<ProductDto, Product>(productDto);
                 product.Name = productDto.Name;
+                product.Id = productDto.Id;
                 product.Description = productDto.Description;
                 product.Price = productDto.Price;
                 product.CategoryName = productDto.CategoryName;
