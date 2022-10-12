@@ -11,9 +11,16 @@ namespace Mango.Web.Services
 {
     public class ProductService : BaseService, IProductService
     {
-        private readonly string servUrl = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ServiceUrls")["ProductAPI"];
+        private readonly string servUrl = new 
+            ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build()
+            .GetSection("ServiceUrls")["ProductAPI"];
+        private readonly IHttpClientFactory _clientFactory;
+
         public ProductService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
+            _clientFactory = httpClientFactory;
         }
 
         public async Task<T> CreateProductAsync<T>(ProductDto product)
@@ -22,7 +29,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = product,
-                Url = servUrl + "/api/products",
+                Url = servUrl + "api/products",
                 AccessToken = ""
             });
         }
@@ -32,7 +39,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = servUrl + "/api/products" + id,
+                Url = servUrl + "api/products" + id,
                 AccessToken = ""
             });
         }
@@ -42,7 +49,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = servUrl + "/api/products",
+                Url = servUrl + "api/products",
                 AccessToken = ""
             });
         }
@@ -52,7 +59,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = servUrl + "/api/products" + id,
+                Url = servUrl + "api/products" + id,
                 AccessToken = ""
             });
         }
@@ -63,7 +70,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.PATCH,
                 Data = product,
-                Url = servUrl + "/api/products",
+                Url = servUrl + "api/products",
                 AccessToken = ""
             });
         }
