@@ -16,11 +16,9 @@ namespace Mango.Web.Services
             .AddJsonFile("appsettings.json")
             .Build()
             .GetSection("ServiceUrls")["ProductAPI"];
-        private readonly IHttpClientFactory _clientFactory;
 
         public ProductService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
-            _clientFactory = httpClientFactory;
         }
 
         public async Task<T> CreateProductAsync<T>(ProductDto product)
