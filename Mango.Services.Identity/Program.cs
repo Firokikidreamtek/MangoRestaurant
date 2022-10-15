@@ -12,13 +12,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString));
 
+//Implement  DBInitializer
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 // Add Identity
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-//Implement  DBInitializer
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 var builderForIdentityServer = builder.Services.AddIdentityServer(options =>
 {

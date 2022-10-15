@@ -23,8 +23,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return StatusCode(500, e.Message);
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public async Task<object> Get()
         {
             try
@@ -40,8 +40,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         [Route("{id}")]
         public async Task<object> GetById(int id)
         {
@@ -59,8 +59,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpPost]
         [Authorize(Roles = "Admin")]
+        [HttpPost]
         public async Task<object> Create([FromBody] ProductDto productDto)
         {
             try
@@ -76,8 +76,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpPatch]
         [Authorize(Roles = "Admin")]
+        [HttpPatch]
         public async Task<object> Update([FromBody] ProductDto productDto)
         {
             try
@@ -93,8 +93,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpDelete]
         [Authorize(Roles = "Admin")]
+        [HttpDelete]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {
