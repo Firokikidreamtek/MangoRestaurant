@@ -27,7 +27,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = product,
-                Url = servUrl + "api/products",
+                Url = servUrl + "/api/products",
                 AccessToken = token
             });
         }
@@ -37,7 +37,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = servUrl + "api/products/" + id,
+                Url = servUrl + "/api/products/" + id,
                 AccessToken = token
             });
         }
@@ -47,7 +47,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = servUrl + "api/products",
+                Url = servUrl + "/api/products",
                 AccessToken = token
             });
         }
@@ -57,7 +57,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = servUrl + "api/products/" + id,
+                Url = servUrl + "/api/products/" + id,
                 AccessToken = token
             });
         }
@@ -68,7 +68,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.PATCH,
                 Data = product,
-                Url = servUrl + "api/products/",
+                Url = servUrl + "/api/products/",
                 AccessToken = token
             });
         }

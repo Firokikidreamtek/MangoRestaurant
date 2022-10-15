@@ -91,7 +91,6 @@ namespace Mango.Web.Controllers
         private async Task<ResponseDto> DeleteProduct(int id)
         {
             string token = await HttpContext.GetTokenAsync("access_token");
-
             var response = await _productService.DeleteProductAsync<ResponseDto>(id, token);
             return response;
         }

@@ -23,9 +23,8 @@ namespace Mango.Services.ProductAPI.Controllers
             return StatusCode(500, e.Message);
         }
 
-        [Authorize]
         [HttpGet]
-        public async Task<object> Get()
+        public async Task<object> GetAll()
         {
             try
             {
