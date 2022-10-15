@@ -21,55 +21,55 @@ namespace Mango.Web.Services
         {
         }
 
-        public async Task<T> CreateProductAsync<T>(ProductDto product)
+        public async Task<T> CreateProductAsync<T>(ProductDto product, string token)
         {
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.POST,
                 Data = product,
                 Url = servUrl + "api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> DeleteProductAsync<T>(int id)
+        public async Task<T> DeleteProductAsync<T>(int id, string token)
         {
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.DELETE,
                 Url = servUrl + "api/products/" + id,
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetAllAsync<T>()
+        public async Task<T> GetAllAsync<T>(string token)
         {
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
                 Url = servUrl + "api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetByIdAsync<T>(int id)
+        public async Task<T> GetByIdAsync<T>(int id, string token)
         {
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
                 Url = servUrl + "api/products/" + id,
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> UpdateProductAsync<T>(ProductDto product)
+        public async Task<T> UpdateProductAsync<T>(ProductDto product, string token)
         {
             return await this.SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.PATCH,
                 Data = product,
                 Url = servUrl + "api/products/",
-                AccessToken = ""
+                AccessToken = token
             });
         }
     }

@@ -1,7 +1,9 @@
+using Duende.IdentityServer.Services;
 using Mango.Services.Identity;
 using Mango.Services.Identity.DBContexts;
 using Mango.Services.Identity.Initializer;
 using Mango.Services.Identity.Models;
+using Mango.Services.Identity.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServe
 
 //Implement  DBInitializer
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+//Add implementation ProfileService
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 // Add Identity
 builder.Services
@@ -33,8 +37,8 @@ var builderForIdentityServer = builder.Services.AddIdentityServer(options =>
     .AddInMemoryClients(SD.Clients)
     .AddAspNetIdentity<ApplicationUser>();
 
-
 builderForIdentityServer.AddDeveloperSigningCredential();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
