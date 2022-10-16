@@ -40,10 +40,10 @@
 								@((item.Price).ToString() + "$")
 				</td>
 				<td>
-				 <a asp-action="Edit" class="btn btn-success" asp-route-Id="@item.Id">
+				 <a asp-action="Edit" class="btn btn-success" asp-route-Id="@item.ProductId">
 				  <i class="fas fa-edit"></i>
 				 </a>
-				 <a asp-action="Delete" class="btn btn-danger" asp-route-Id="@item.Id">
+				 <a asp-action="Delete" class="btn btn-danger" asp-route-Id="@item.ProductId">
 				  <i class="fas fa-trash"></i>
 				 </a>
 				</td>

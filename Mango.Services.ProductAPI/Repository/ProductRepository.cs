@@ -40,7 +40,7 @@ namespace Mango.Services.ProductAPI.Repository
             {
                 Product newProduct = _mapper.Map<ProductDto, Product>(productDto);
                 product.Name = productDto.Name;
-                product.Id = productDto.Id;
+                product.ProductId = productDto.ProductId;
                 product.Description = productDto.Description;
                 product.Price = productDto.Price;
                 product.CategoryName = productDto.CategoryName;
@@ -55,7 +55,7 @@ namespace Mango.Services.ProductAPI.Repository
         {
             try
             {
-                Product product = await _db.Products.FirstOrDefaultAsync(product => product.Id == id);
+                Product product = await _db.Products.FirstOrDefaultAsync(product => product.ProductId == id);
                 if (product == null)
                 {
                     return false;
@@ -73,7 +73,7 @@ namespace Mango.Services.ProductAPI.Repository
 
         public async Task<ProductDto> GetById(int id)
         {
-            Product product = await _db.Products.FirstOrDefaultAsync(product => product.Id == id);
+            Product product = await _db.Products.FirstOrDefaultAsync(product => product.ProductId == id);
             return _mapper.Map<ProductDto>(product);
         }
 
