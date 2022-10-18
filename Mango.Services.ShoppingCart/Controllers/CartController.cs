@@ -67,9 +67,9 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
-        [HttpDelete]
-        [Route("{cartId}")]
-        public async Task<object> RemoveCart(int cartId)
+        [HttpPost]
+        [Route("RemoveCart/{cartId}")]
+        public async Task<object> RemoveDetail(int cartId)
         {
             try
             {
