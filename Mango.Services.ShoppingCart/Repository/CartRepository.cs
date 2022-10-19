@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Mango.Services.ShoppingCartAPI.DBContexts;
 using Mango.Services.ShoppingCartAPI.Models;
-using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.ShoppingCartAPI.Repository
@@ -127,7 +126,7 @@ namespace Mango.Services.ShoppingCartAPI.Repository
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

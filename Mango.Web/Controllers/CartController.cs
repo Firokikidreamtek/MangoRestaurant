@@ -44,11 +44,6 @@ namespace Mango.Web.Controllers
             return cartDto;
         }
 
-<<<<<<< HEAD
-=======
-        //[Authorize]
-        //[HttpDelete]
->>>>>>> f3bfa438b950dd5fe7be03ecbe150844611ce8fe
         public async Task<IActionResult> Remove(int cartDetailsId)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
