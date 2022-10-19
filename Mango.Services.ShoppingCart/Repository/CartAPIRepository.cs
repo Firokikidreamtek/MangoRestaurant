@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.ShoppingCartAPI.Repository
 {
-    public class CartRepository : ICartRepository
+    public class CartAPIRepository : ICartAPIRepository
     {
         private readonly ApplicationDbContext _db;
         private IMapper _mapper;
 
-        public CartRepository(ApplicationDbContext db, IMapper mapper)
+        public CartAPIRepository(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;

@@ -2,7 +2,7 @@
 
 namespace Mango.Services.ProductAPI.Repository
 {
-    public interface IProductRepository
+    public interface IProductAPIRepository
     {
         Task<IEnumerable<ProductDto>> GetAll();
         Task<ProductDto> GetById(int id);

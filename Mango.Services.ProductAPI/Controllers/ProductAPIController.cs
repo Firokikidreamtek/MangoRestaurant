@@ -9,9 +9,9 @@ namespace Mango.Services.ProductAPI.Controllers
     public class ProductAPIController : Controller
     {
         private ResponseDto _response;
-        private IProductRepository _productRepository;
+        private IProductAPIRepository _productRepository;
 
-        public ProductAPIController(IProductRepository productRepository)
+        public ProductAPIController(IProductAPIRepository productRepository)
         {
             _response = new ResponseDto();
             _productRepository = productRepository;

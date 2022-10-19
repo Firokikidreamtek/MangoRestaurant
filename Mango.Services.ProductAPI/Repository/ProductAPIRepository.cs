@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Mango.Services.ProductAPI.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class ProductAPIRepository : IProductAPIRepository
     {
         private readonly ApplicationDbContext _db;
         private IMapper _mapper;
-        public ProductRepository(ApplicationDbContext db, IMapper mapper)
+        public ProductAPIRepository(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;

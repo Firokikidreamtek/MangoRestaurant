@@ -41,7 +41,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton(mapper);
 
 //Add Implementation
-builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartAPIRepository, CartAPIRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
