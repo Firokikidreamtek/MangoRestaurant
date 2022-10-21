@@ -1,17 +1,12 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Models.Dto;
 using Mango.Web.Services.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mango.Web.Services
 {
     public class CartService : BaseService, ICartService
     {
-        private readonly string servUrl = new
+        private readonly string servCartUrl = new
             ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build()
@@ -26,7 +21,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = cartDto,
-                Url = servUrl + "/api/cart",
+                Url = servCartUrl + "/api/cart",
                 AccessToken = token
             });
         }
@@ -37,7 +32,7 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = cartId,
-                Url = servUrl + "/api/cart/RemoveCart/" + cartId,
+                Url = servCartUrl + "/api/cart/RemoveCart/" + cartId,
                 AccessToken = token
             });
         }
@@ -47,7 +42,7 @@ namespace Mango.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = servUrl + "/api/cart/" + userId,
+                Url = servCartUrl + "/api/cart/" + userId,
                 AccessToken = token
             });
         }
@@ -58,7 +53,29 @@ namespace Mango.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = cartDto,
-                Url = servUrl + "/api/cart/UpdateCart",
+                Url = servCartUrl + "/api/cart/UpdateCart",
+                AccessToken = token
+            });
+        }
+
+        public async Task<T> ApplyCoupon<T>(CartDto cartDto, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartDto,
+                Url = servCartUrl + "/api/cart/ApplyCoupon",
+                AccessToken = token
+            });
+        }
+
+        public async Task<T> RemoveCoupon<T>(string userId, string token = null)
+        {
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = userId,
+                Url = servCartUrl + "/api/cart/RemoveCoupon",
                 AccessToken = token
             });
         }

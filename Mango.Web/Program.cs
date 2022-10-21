@@ -11,11 +11,7 @@ string identityServUrl = new
             .Build()
             .GetSection("ServiceUrls")["IdentityServer"];
 
-string shoppingCartServUrl = new
-            ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build()
-            .GetSection("ServiceUrls")["ShoppingCartAPI"];
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,10 +20,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<ICartService, CartService>();
+builder.Services.AddHttpClient<ICouponService, CouponService>();
+
 
 //Add implementation of ProductService, CartService
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICouponService, CouponService>();
+
+
 
 
 //Add Authentification
