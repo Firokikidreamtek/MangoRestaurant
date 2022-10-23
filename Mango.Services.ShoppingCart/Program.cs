@@ -1,3 +1,4 @@
+using Mango.MessageBus;
 using Mango.Services.ShoppingCartAPI;
 using Mango.Services.ShoppingCartAPI.DBContexts;
 using Mango.Services.ShoppingCartAPI.Repository;
@@ -42,6 +43,8 @@ builder.Services.AddSingleton(mapper);
 
 //Add Implementation
 builder.Services.AddScoped<ICartAPIRepository, CartAPIRepository>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
