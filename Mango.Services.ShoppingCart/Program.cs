@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionStringForCoupon = builder.Configuration.GetConnectionString("CouponAPI");
+
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddControllers();
@@ -44,6 +46,10 @@ builder.Services.AddSingleton(mapper);
 //Add Implementation
 builder.Services.AddScoped<ICartAPIRepository, CartAPIRepository>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
+builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(u => u.BaseAddress =
+              new Uri(connectionStringForCoupon));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
