@@ -1,6 +1,7 @@
+using Mango.MessageBus;
 using Mango.Services.OrderAPIN.DbContexts;
 using Mango.Services.OrderAPIN.Extension;
-using Mango.Services.OrderAPIN.Messages;
+using Mango.Services.OrderAPIN.Messaging;
 using Mango.Services.OrderAPIN.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +35,7 @@ namespace Mango.Services.OrderAPIN
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             services.AddSingleton(new OrderRepository(optionBuilder.Options));
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
             services.AddControllers();
 

@@ -1,7 +1,6 @@
-﻿using Mango.Services.OrderAPIN.Messaging;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Mango.Services.PaymentAPI.Messaging;
 
-namespace Mango.Services.OrderAPIN.Extension
+namespace Mango.Services.PaymentAPI.Extension
 {
     public static class ApplicationBuilderExtensions
     {

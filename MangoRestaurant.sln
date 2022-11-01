@@ -21,7 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ingeration", "Ingeration", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.MessageBus", "Mango.MessageBus\Mango.MessageBus.csproj", "{CBA5C612-DF2B-4364-AB95-44E852553061}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.OrderAPIN", "Mango.Services.OrderAPIN\Mango.Services.OrderAPIN.csproj", "{FC83D397-89C5-439B-840A-515B2917DFC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.OrderAPIN", "Mango.Services.OrderAPIN\Mango.Services.OrderAPIN.csproj", "{FC83D397-89C5-439B-840A-515B2917DFC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{D6878549-B436-4510-AAD9-AF6F3B1E692F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProcessor", "PaymentProcessor\PaymentProcessor.csproj", "{CB73437E-F0FF-47DF-A373-7B0CF563F0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Services.PaymentAPI", "Mango.Services.PaymentAPI\Mango.Services.PaymentAPI.csproj", "{1A0DBEB3-FFB3-4B15-B324-4D54B060371E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,14 @@ Global
 		{FC83D397-89C5-439B-840A-515B2917DFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC83D397-89C5-439B-840A-515B2917DFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC83D397-89C5-439B-840A-515B2917DFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB73437E-F0FF-47DF-A373-7B0CF563F0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB73437E-F0FF-47DF-A373-7B0CF563F0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB73437E-F0FF-47DF-A373-7B0CF563F0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB73437E-F0FF-47DF-A373-7B0CF563F0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0DBEB3-FFB3-4B15-B324-4D54B060371E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0DBEB3-FFB3-4B15-B324-4D54B060371E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0DBEB3-FFB3-4B15-B324-4D54B060371E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0DBEB3-FFB3-4B15-B324-4D54B060371E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +83,8 @@ Global
 		{083FBEB9-0AA7-4DAC-97DC-C2916F0D59F8} = {27B69738-D0BA-4EF6-BD58-235EC8340AE1}
 		{CBA5C612-DF2B-4364-AB95-44E852553061} = {A500B2E3-EA17-45D0-8074-D3D41B852C87}
 		{FC83D397-89C5-439B-840A-515B2917DFC2} = {27B69738-D0BA-4EF6-BD58-235EC8340AE1}
+		{CB73437E-F0FF-47DF-A373-7B0CF563F0F1} = {D6878549-B436-4510-AAD9-AF6F3B1E692F}
+		{1A0DBEB3-FFB3-4B15-B324-4D54B060371E} = {27B69738-D0BA-4EF6-BD58-235EC8340AE1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03D58A16-33FE-4CA9-8B93-B1D0F2CFF7B0}

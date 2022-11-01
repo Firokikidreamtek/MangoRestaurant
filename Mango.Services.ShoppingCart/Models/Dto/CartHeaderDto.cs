@@ -1,11 +1,10 @@
-﻿using Mango.Services.ShoppingCartAPI.Models.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mango.Services.ShoppingCartAPI.Models
+namespace Mango.Services.ShoppingCartAPI.Models.Dto
 {
     public class CartHeaderDto
     {

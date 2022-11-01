@@ -6,7 +6,7 @@ using Mango.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace Mango.Services.Identity.Services
+namespace Mango.Services.Identity
 {
     public class ProfileService : IProfileService
     {

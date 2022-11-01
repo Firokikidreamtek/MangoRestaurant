@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mango.Services.OrderAPIN.Messages
+namespace Mango.Services.PaymentAPI.Messaging
 {
     public interface IAzureServiceBusConsumer
     {
