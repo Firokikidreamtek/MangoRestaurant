@@ -24,7 +24,7 @@ namespace Mango.Web.Controllers
 
         private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
         {
-            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var userId = User.Claims.Where(u => u.Type == "sid")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.GetByUserIdAsync<ResponseDto>(userId, accessToken);
 
@@ -122,7 +122,7 @@ namespace Mango.Web.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> Confirmation()
+        public IActionResult Confirmation()
         {
             return View();
         }

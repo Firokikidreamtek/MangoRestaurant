@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Models.Dto;
 using Mango.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -34,13 +35,14 @@ namespace Mango.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProductDto product)
         {
             if (ModelState.IsValid)
             {
                 string token = await HttpContext.GetTokenAsync("access_token");
                 var response = await _productService.CreateProductAsync<ResponseDto>(product, token);
+                
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(Index));

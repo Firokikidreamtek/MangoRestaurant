@@ -1,29 +1,61 @@
 using Mango.Services.ProductAPI;
 using Mango.Services.ProductAPI.DBContexts;
+using Mango.Services.ProductAPI.Models;
 using Mango.Services.ProductAPI.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString));
-builder.Services.AddControllers();
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<IProductAPIRepository, ProductAPIRepository>();
+
+//Add AutoMapper
+var mapper = MappingConfig.RegisterMap().CreateMapper();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSingleton(mapper);
 
 //Add Authentication
 var connectionStringForAuthorization = builder.Configuration.GetConnectionString("AuthorizeConnection");
-builder.Services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
-                {
+//builder.Services.AddAuthentication("Bearer")
+//                .AddJwtBearer("Bearer", options =>
+//                {
 
-                    options.Authority = connectionStringForAuthorization;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false
-                    };
+//                    options.Authority = connectionStringForAuthorization;
+//                    options.TokenValidationParameters = new TokenValidationParameters
+//                    {
+//                        ValidateAudience = false
+//                    };
 
-                });
+//                });
+var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(x => {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.Authority = connectionStringForAuthorization;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 builder.Services.AddAuthorization(options =>
 {
@@ -35,13 +67,10 @@ builder.Services.AddAuthorization(options =>
 });
 
 
-//Add AutoMapper
-var mapper = MappingConfig.RegisterMap().CreateMapper();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddSingleton(mapper);
 
 //Add Implementation
-builder.Services.AddScoped<IProductAPIRepository, ProductAPIRepository>();
+
+builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -85,7 +114,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

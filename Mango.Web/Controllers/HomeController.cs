@@ -24,7 +24,7 @@ namespace Mango.Web.Controllers
         public async Task<IActionResult> Index()
         {
             List<ProductDto> list = new();
-            var response = await _productService.GetAllAsync<ResponseDto>("");
+            var response = await _productService.GetAllAsync<ResponseDto>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
@@ -49,14 +49,14 @@ namespace Mango.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Details(ProductDto productDto)
         {
             CartDto cartDto = new()
             {
                 CartHeader = new CartHeaderDto
                 {
-                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+                    UserId = User.Claims.Where(u => u.Type == "sid")?.FirstOrDefault()?.Value
                 }
             };
 
@@ -86,16 +86,19 @@ namespace Mango.Web.Controllers
             return View(productDto);
         }
 
-        [Authorize]
-        public async Task<IActionResult> Login()
-        {
-            return RedirectToAction(nameof(Index));
-        }
+        //[Authorize]
+        //public async Task<IActionResult> Login()
+        //{
+        //    var accessToken = await HttpContext.GetTokenAsync("access_token");
+        //    return RedirectToAction(nameof(Index), "Home");
+        //}
 
-        public IActionResult Logout()
-        {
-            return SignOut("Cookies", "oidc");
-        }
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await HttpContext.SignOutAsync();
+        //    SignOut("Cookies", "oidc");
+        //    return RedirectToAction("Index", "Home");
+        //}
         public IActionResult Privacy()
         {
             return View();
