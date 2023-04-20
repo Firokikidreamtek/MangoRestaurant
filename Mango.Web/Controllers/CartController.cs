@@ -58,7 +58,7 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> Remove(int cartDetailsId)
         {
-            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var userId = User.Claims.Where(u => u.Type == "sid")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.DecreaseAsync<ResponseDto>(cartDetailsId, accessToken);
 
@@ -72,7 +72,7 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
         {
-            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var userId = User.Claims.Where(u => u.Type == "sid")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.ApplyCoupon<ResponseDto>(cartDto, accessToken);
 
@@ -85,7 +85,7 @@ namespace Mango.Web.Controllers
 
         public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
         {
-            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var userId = User.Claims.Where(u => u.Type == "sid")?.FirstOrDefault()?.Value;
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.RemoveCoupon<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
 

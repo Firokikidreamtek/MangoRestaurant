@@ -1,6 +1,7 @@
 using Mango.MessageBus;
 using Mango.Services.ShoppingCartAPI.Messages;
 using Mango.Services.ShoppingCartAPI.Models.Dto;
+using Mango.Services.ShoppingCartAPI.RabbitMQSender;
 using Mango.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,17 +14,22 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         private readonly ICartAPIRepository _cartRepository;
         private readonly IMessageBus _messageBus;
         private readonly ICouponRepository _couponRepository;
-        protected ResponseDto _response;
+		private readonly IRabbitMQCartMessageSender _rabbitMQCartMessageSender;
+		protected ResponseDto _response;
 
-        public CartAPIController(ICartAPIRepository cartRepository, IMessageBus messageBus, ICouponRepository couponRepository = null)
-        {
-            _cartRepository = cartRepository;
-            _messageBus = messageBus;
-            _response = new ResponseDto();
-            _couponRepository = couponRepository;
-        }
+		public CartAPIController(ICartAPIRepository cartRepository, 
+                                 IMessageBus messageBus, 
+                                 ICouponRepository couponRepository, 
+                                 IRabbitMQCartMessageSender rabbitMQCartMessageSender)
+		{
+			_cartRepository = cartRepository;
+			_rabbitMQCartMessageSender = rabbitMQCartMessageSender;
+			_couponRepository = couponRepository;
+			_messageBus = messageBus;
+			_response = new ResponseDto();
+		}
 
-        [HttpGet]
+		[HttpGet]
         [Route("{userId}")]
         public async Task<object> GetCart(string userId)
         {
@@ -149,10 +155,12 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 }
 
                 checkoutHeader.CartDetails = cartDto.CartDetails;
-                //logic to add message to process order.
-                await _messageBus.PublishMessage(checkoutHeader, "checkoutmessagetopic");
+				//logic to add message to process order.
+				//await _messageBus.PublishMessage(checkoutHeader, "checkoutmessagetopic");
 
-            }
+				_rabbitMQCartMessageSender.SendMessage(checkoutHeader, "checkoutqueue");
+				await _cartRepository.Clear(checkoutHeader.UserId);
+			}
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
