@@ -2,6 +2,7 @@ using Mango.MessageBus;
 using Mango.Services.OrderAPIN.DbContexts;
 using Mango.Services.OrderAPIN.Extension;
 using Mango.Services.OrderAPIN.Messaging;
+using Mango.Services.OrderAPIN.RabbitMQSender;
 using Mango.Services.OrderAPIN.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,9 +34,13 @@ namespace Mango.Services.OrderAPIN
 
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+            services.AddHostedService<RabbitMQCheckoutConsumer>();
             services.AddSingleton(new OrderRepository(optionBuilder.Options));
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
             services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
+
 
             services.AddControllers();
 

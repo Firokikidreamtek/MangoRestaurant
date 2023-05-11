@@ -1,6 +1,7 @@
 using Mango.MessageBus;
 using Mango.Services.PaymentAPI.Extension;
 using Mango.Services.PaymentAPI.Messaging;
+using Mango.Services.PaymentAPI.RabbitMQSender;
 using Microsoft.OpenApi.Models;
 using PaymentProcessor;
 
@@ -21,6 +22,8 @@ namespace Mango.Services.PaymentAPI
             services.AddSingleton<IProcessPayment, ProcessPayment>();
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
             services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            services.AddSingleton<IRabbitMQPaymentMessageSender, RabbitMQPaymentMessageSender>();
+            services.AddHostedService<RabbitMQPaymentConsumer>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
